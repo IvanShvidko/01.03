@@ -1,20 +1,53 @@
 <html> 
 <head> 
 <title>Информация о владельце машины</title> 
-<script> 
-function showConfirmation() { 
-var ownerName = document.getElementById("ownerName").value; 
-var carNumber = document.getElementById("carNumber").value; 
-var carBrand = document.getElementById("carBrand").value; 
-var carColor = document.getElementById("carColor").value; 
-var ownerAddress = document.getElementById("ownerAddress").value; 
-var familyStatus = document.getElementById("familyStatus").value; 
-var relativeName = document.getElementById("relativeName").value; 
-var relationship = document.getElementById("relationship").value; 
-var dob = document.getElementById("dob").value;
-var confirmationInfo = "ФИО владельца: " + ownerName + "<br>" + "Номер машины: " + carNumber + "<br>" + "Марка машины: " + carBrand + "<br>" + "Цвет машины: " + carColor + "<br>" + "Адрес владельца: " + ownerAddress + "<br>" + "Семейное положение: " + familyStatus + "<br>" + "Родственник: " + relativeName + "<br>" + "Вид родства: " + relationship + "<br>" + "Дата рождения: " + dob;
-var confirmationWindow = window.open("width=400 , height=400");
-confirmationWindow.document.write(confirmationInfo);
+<script>
+function showConfirmation() {
+    var ownerName = document.getElementById("ownerName").value;
+    var carNumber = document.getElementById("carNumber").value;
+    var carBrand = document.getElementById("carBrand").value;
+    var carColor = document.getElementById("carColor").value;
+    var ownerAddress = document.getElementById("ownerAddress").value;
+    var familyStatus = document.getElementById("familyStatus").value;
+    var relativeName = document.getElementById("relativeName").value;
+    var relationship = document.getElementById("relationship").value;
+    var dob = document.getElementById("dob").value;
+
+    var selectedOptions = [];
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(function(checkbox) {
+        if (checkbox.checked) {
+            selectedOptions.push(checkbox.value);
+        }
+    });
+
+    var confirmationInfo = "ФИО владельца: " + ownerName + "<br>" +
+        "Номер машины: " + carNumber + "<br>" +
+        "Марка машины: " + carBrand + "<br>" +
+        "Цвет машины: " + carColor + "<br>" +
+        "Адрес владельца: " + ownerAddress + "<br>" +
+        "Семейное положение: " + familyStatus + "<br>" +
+        "Родственник: " + relativeName + "<br>" +
+        "Вид родства: " + relationship + "<br>" +
+        "Дата рождения: " + dob + "<br>" +
+        "Плюс: " + "+ " +selectedOptions.join(", ");
+
+    var userAgent = window.navigator.userAgent.toLowerCase();
+    var browserColor;
+    if(userAgent.indexOf('chrome') > -1) {
+        browserColor = "lightblue";
+    } else if(userAgent.indexOf('firefox') > -1) {
+        browserColor = "lightgreen";
+    } else if(userAgent.indexOf('safari') > -1) {
+        browserColor = "lightyellow";
+    } else {
+        browserColor = "lightgray";
+    }
+
+    var confirmationWindow = window.open("", "", "width=400,height=400");
+    confirmationWindow.document.write('<div style="background-color: ' + browserColor + '; padding: 20px;">' + confirmationInfo + '</div>');
+
+    window.status = "Заполнены данные: ФИО владельца, Номер машины, Марка машины, В наличии, Цвет машины, Адрес владельца, Семейное положение, Родственник, Вид родства, Дата рождения";
 }
 </script>
 </head> 
@@ -28,7 +61,12 @@ confirmationWindow.document.write(confirmationInfo);
 <br><br> 
 Марка машины: 
 <input type="text" id="carBrand">
-<br><br> 
+<br><br>
+В наличии:<br> 
+<input type='checkbox' name='plus' value='Аудиосистема'/> Аудиосистема <br/>
+<input type='checkbox' name='plus' value='Зимняя резина'/> Зимняя резина<br/>
+<input type='checkbox' name='plus' value='Техосмотр'/> Техосмотр
+<br><br>
 Цвет машины: 
 <input type="text" id="carColor">
 <br><br> 
@@ -39,7 +77,7 @@ confirmationWindow.document.write(confirmationInfo);
 <select id="familyStatus"> 
 <option value="женат/замужем">женат/замужем
 </option> 
-<option value="не женат/не замужем">не женат/не замужем
+<option value="не женат/не замужем">не замужем
 </option> 
 <option value="в разводе">в разводе
 </option> 
@@ -67,22 +105,3 @@ confirmationWindow.document.write(confirmationInfo);
 </form> 
 </body> 
 </html>
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
